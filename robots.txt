@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /Screenshot-Claude/
+
+Sitemap: https://fontaneroceuti.es/sitemap.xml
