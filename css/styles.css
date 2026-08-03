@@ -271,7 +271,7 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   margin-top: var(--header-h);
-  background: linear-gradient(135deg, #0a1628 0%, #0f2847 50%, #0d3b66 100%);
+  background: url('../img/Plumber_working_on_copper_pipes_202608010024.jpeg') center/cover no-repeat;
   overflow: hidden;
 }
 
@@ -279,9 +279,7 @@ ul { list-style: none; }
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background:
-    radial-gradient(circle at 20% 50%, rgba(0,98,204,0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0,98,204,0.1) 0%, transparent 40%);
+  background: rgba(10, 22, 40, 0.75);
 }
 
 .hero__content {
