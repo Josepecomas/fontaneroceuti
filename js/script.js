@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // Guardar el mensaje de WhatsApp en el boton
           var waBtn = formSuccess.querySelector('.form__success-wa');
           if (waBtn) {
-            waBtn.href = 'https://wa.me/34655072638?text=' + encodeURIComponent(whatsappMsg);
+            waBtn.href = 'https://wa.me/34622749896?text=' + encodeURIComponent(whatsappMsg);
           }
         }
         submitBtn.disabled = false;
