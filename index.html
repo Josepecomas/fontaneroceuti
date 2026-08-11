@@ -17,8 +17,10 @@
   <meta property="og:url" content="https://fontaneroceuti.es/">
   <meta property="og:locale" content="es_ES">
 
-  <!-- Favicon SVG inline -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
   <!-- Estilos -->
   <link rel="stylesheet" href="css/styles.css">
@@ -129,8 +131,13 @@
   <header class="header" id="header">
     <div class="header__inner">
       <a href="#inicio" class="header__logo">
-        <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><path d="M28 8h-4V6a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v2H8a2 2 0 0 0-2 2v4c0 3.3 2.7 6 6 6h1.1c1 1.8 2.8 3 4.9 3.5V28h-4a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2h-4v-4.5c2.1-.5 3.9-1.7 4.9-3.5H26c3.3 0 6-2.7 6-6v-4a2 2 0 0 0-2-2zM8 14v-4h4v7.7A4 4 0 0 1 8 14zm20 0a4 4 0 0 1-4 3.7V10h4v4z"/></svg>
-        Fontanero Ceutí
+        <img
+          src="logo-fontanero-ceuti.png"
+          alt="Fontanero Ceutí"
+          width="1678"
+          height="453"
+          style="display:block;width:clamp(155px,16vw,205px);height:auto;"
+        >
       </a>
 
       <nav class="nav" id="nav">
@@ -513,7 +520,7 @@
         </div>
 
         <!-- Formulario -->
-        <form class="form" id="contactForm" name="contacto" method="POST" data-netlify="true">
+        <form class="form" id="formspreeContactForm" name="contacto" method="POST" action="https://formspree.io/f/xaewodqn">
           <div class="form__fields">
             <h3 class="form__title">Solicita tu Presupuesto Gratis</h3>
             <p class="form__subtitle">Rellena el formulario y te contactamos en menos de 1 hora.</p>
@@ -526,7 +533,7 @@
               </div>
               <div class="form__group">
                 <label class="form__label" for="telefono">Teléfono *</label>
-                <input class="form__input" type="tel" id="telefono" name="telefono" placeholder="622 749 896" required>
+                <input class="form__input" type="tel" id="telefono" name="telefono" placeholder="622 749 896" pattern="(?:\+34\s?)?[6-9](?:\s?\d){8}" title="Introduce un teléfono español válido" required>
                 <span class="form__error">Introduce un teléfono válido</span>
               </div>
             </div>
@@ -632,5 +639,40 @@
 
   <!-- JavaScript -->
   <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.getElementById('formspreeContactForm');
+      if (!form) return;
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        var submitButton = form.querySelector('.form__submit');
+        var formFields = form.querySelector('.form__fields');
+        var formSuccess = form.querySelector('.form__success');
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(function (response) {
+          if (!response.ok) throw new Error('No se pudo enviar el formulario');
+          formFields.style.display = 'none';
+          formSuccess.classList.add('is-visible');
+          form.reset();
+        })
+        .catch(function () {
+          alert('No hemos podido enviar la solicitud. Llámanos o escríbenos por WhatsApp.');
+          submitButton.disabled = false;
+          submitButton.textContent = 'Solicitar Presupuesto Gratis';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
